@@ -115,4 +115,16 @@ public class StoreResource {
         storeService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
     }
+
+    /**
+     * {@code GET  /stores} : get all the user's favorite stores.
+     *
+
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of stores in body.
+     */
+    @GetMapping("/stores/favorites")
+    public List<StoreDTO> getUserFavoriteStores() {
+        log.debug("REST request to get all Stores");
+        return storeService.findUserFavoriteStores();
+    }
 }

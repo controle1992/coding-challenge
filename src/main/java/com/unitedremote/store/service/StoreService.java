@@ -85,4 +85,15 @@ public class StoreService {
         storeRepository.deleteById(id);
     }
 
+    /**
+     * Get all the user's favorite stores.
+     *
+     * @return the list of entities.
+     */
+    public List<StoreDTO> findUserFavoriteStores() {
+        log.debug("Request to get all Stores for current User");
+        return storeRepository.findByUserIsCurrentUser().stream()
+            .map(storeMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
 }
