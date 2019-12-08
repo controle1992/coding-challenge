@@ -6,18 +6,19 @@ import { filter, map } from 'rxjs/operators';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
 import { IStore } from 'app/shared/model/store.model';
+import { Location } from 'app/shared/model/location.model';
 import { AccountService } from 'app/core/auth/account.service';
 import { StoreService } from './store.service';
 
 @Component({
   selector: 'jhi-store',
-  templateUrl: './store.component.html',
-  styleUrls: ['store.component.scss']
+  templateUrl: './store.component.html'
 })
 export class StoreComponent implements OnInit, OnDestroy {
   stores: IStore[];
   currentAccount: any;
   eventSubscriber: Subscription;
+  userLocation: Location = new Location();
 
   constructor(
     protected storeService: StoreService,
@@ -47,6 +48,7 @@ export class StoreComponent implements OnInit, OnDestroy {
       this.currentAccount = account;
     });
     this.registerChangeInStores();
+    this.getLocation();
   }
 
   ngOnDestroy() {
@@ -63,5 +65,14 @@ export class StoreComponent implements OnInit, OnDestroy {
 
   protected onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
+  }
+
+  getLocation(): void {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        this.userLocation.longitude = position.coords.longitude;
+        this.userLocation.latitude = position.coords.latitude;
+      });
+    }
   }
 }
