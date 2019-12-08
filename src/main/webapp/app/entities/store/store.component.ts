@@ -11,7 +11,8 @@ import { StoreService } from './store.service';
 
 @Component({
   selector: 'jhi-store',
-  templateUrl: './store.component.html'
+  templateUrl: './store.component.html',
+  styleUrls: ['store.component.scss']
 })
 export class StoreComponent implements OnInit, OnDestroy {
   stores: IStore[];
