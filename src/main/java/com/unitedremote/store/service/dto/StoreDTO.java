@@ -1,5 +1,7 @@
 package com.unitedremote.store.service.dto;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -22,9 +24,7 @@ public class StoreDTO implements Serializable {
     private Double longitude;
 
 
-    private Long userId;
-
-    private String userLogin;
+    private Set<UserDTO> users = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -82,20 +82,12 @@ public class StoreDTO implements Serializable {
         this.longitude = longitude;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Set<UserDTO> getUsers() {
+        return users;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public String getUserLogin() {
-        return userLogin;
-    }
-
-    public void setUserLogin(String userLogin) {
-        this.userLogin = userLogin;
+    public void setUsers(Set<UserDTO> users) {
+        this.users = users;
     }
 
     @Override
@@ -129,8 +121,6 @@ public class StoreDTO implements Serializable {
             ", city='" + getCity() + "'" +
             ", latitude=" + getLatitude() +
             ", longitude=" + getLongitude() +
-            ", user=" + getUserId() +
-            ", user='" + getUserLogin() + "'" +
             "}";
     }
 }

@@ -1,3 +1,5 @@
+import { IUser } from 'app/core/user/user.model';
+
 export interface IStore {
   id?: number;
   name?: string;
@@ -6,8 +8,7 @@ export interface IStore {
   city?: string;
   latitude?: number;
   longitude?: number;
-  userLogin?: string;
-  userId?: number;
+  users?: IUser[];
 }
 
 export class Store implements IStore {
@@ -19,7 +20,6 @@ export class Store implements IStore {
     public city?: string,
     public latitude?: number,
     public longitude?: number,
-    public userLogin?: string,
-    public userId?: number
+    public users?: IUser[]
   ) {}
 }

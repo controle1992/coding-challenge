@@ -31,7 +31,9 @@
                 </dd>
                 <dt><span>User</span></dt>
                 <dd>
-                    {{store.userLogin}}
+                    <span *ngFor="let user of store.users; let last = last">
+                        {{user.login}}{{last ? '' : ', '}}
+                    </span>
                 </dd>
             </dl>
 

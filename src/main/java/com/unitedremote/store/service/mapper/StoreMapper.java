@@ -11,12 +11,8 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring", uses = {UserMapper.class})
 public interface StoreMapper extends EntityMapper<StoreDTO, Store> {
 
-    @Mapping(source = "user.id", target = "userId")
-    @Mapping(source = "user.login", target = "userLogin")
-    StoreDTO toDto(Store store);
 
-    @Mapping(source = "userId", target = "user")
-    Store toEntity(StoreDTO storeDTO);
+    @Mapping(target = "removeUser", ignore = true)
 
     default Store fromId(Long id) {
         if (id == null) {

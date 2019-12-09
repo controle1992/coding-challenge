@@ -29,7 +29,7 @@ export class StoreUpdateComponent implements OnInit {
     city: [],
     latitude: [],
     longitude: [],
-    userId: []
+    users: []
   });
 
   constructor(
@@ -63,7 +63,7 @@ export class StoreUpdateComponent implements OnInit {
       city: store.city,
       latitude: store.latitude,
       longitude: store.longitude,
-      userId: store.userId
+      users: store.users
     });
   }
 
@@ -91,7 +91,7 @@ export class StoreUpdateComponent implements OnInit {
       city: this.editForm.get(['city']).value,
       latitude: this.editForm.get(['latitude']).value,
       longitude: this.editForm.get(['longitude']).value,
-      userId: this.editForm.get(['userId']).value
+      users: this.editForm.get(['users']).value
     };
   }
 
@@ -113,5 +113,16 @@ export class StoreUpdateComponent implements OnInit {
 
   trackUserById(index: number, item: IUser) {
     return item.id;
+  }
+
+  getSelected(selectedVals: any[], option: any) {
+    if (selectedVals) {
+      for (let i = 0; i < selectedVals.length; i++) {
+        if (option.id === selectedVals[i].id) {
+          return selectedVals[i];
+        }
+      }
+    }
+    return option;
   }
 }
