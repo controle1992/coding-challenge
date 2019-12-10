@@ -3,8 +3,8 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { SERVER_API_URL } from 'app/app.constants';
-import { createRequestOption } from 'app/shared/util/request-util';
 import { IStore } from 'app/shared/model/store.model';
+import { Location } from 'app/shared/model/location.model';
 
 type EntityResponseType = HttpResponse<IStore>;
 type EntityArrayResponseType = HttpResponse<IStore[]>;
@@ -27,9 +27,8 @@ export class StoreService {
     return this.http.get<IStore>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  query(req?: any): Observable<EntityArrayResponseType> {
-    const options = createRequestOption(req);
-    return this.http.get<IStore[]>(this.resourceUrl, { params: options, observe: 'response' });
+  query(location: Location): Observable<EntityArrayResponseType> {
+    return this.http.post<IStore[]>(this.resourceUrl + '-sorted', location, { observe: 'response' });
   }
 
   delete(id: number): Observable<HttpResponse<any>> {

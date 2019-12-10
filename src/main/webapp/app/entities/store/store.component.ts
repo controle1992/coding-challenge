@@ -18,7 +18,7 @@ export class StoreComponent implements OnInit, OnDestroy {
   stores: IStore[];
   currentAccount: any;
   eventSubscriber: Subscription;
-  userLocation: Location = new Location();
+  userLocation: Location;
 
   constructor(
     protected storeService: StoreService,
@@ -29,7 +29,7 @@ export class StoreComponent implements OnInit, OnDestroy {
 
   loadAll() {
     this.storeService
-      .query()
+      .query(this.userLocation)
       .pipe(
         filter((res: HttpResponse<IStore[]>) => res.ok),
         map((res: HttpResponse<IStore[]>) => res.body)
@@ -43,12 +43,11 @@ export class StoreComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.loadAll();
+    this.getLocation();
     this.accountService.identity().then(account => {
       this.currentAccount = account;
     });
     this.registerChangeInStores();
-    this.getLocation();
   }
 
   ngOnDestroy() {
@@ -72,6 +71,7 @@ export class StoreComponent implements OnInit, OnDestroy {
       navigator.geolocation.getCurrentPosition(position => {
         this.userLocation.longitude = position.coords.longitude;
         this.userLocation.latitude = position.coords.latitude;
+        this.loadAll();
       });
     }
   }

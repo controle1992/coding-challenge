@@ -7,6 +7,8 @@ import com.unitedremote.store.repository.UserRepository;
 import com.unitedremote.store.security.SecurityUtils;
 import com.unitedremote.store.service.dto.StoreDTO;
 import com.unitedremote.store.service.mapper.StoreMapper;
+import com.unitedremote.store.service.util.Location;
+import com.unitedremote.store.service.util.LocationComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,10 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -111,5 +110,11 @@ public class StoreService {
         return storeRepository.findFavorites().stream()
             .map(storeMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    public List<StoreDTO> getStoresByLocation(Location userLocation) {
+        List<Store> stores = storeRepository.findAllWithEagerRelationships();
+        Collections.sort(stores, new LocationComparator(userLocation));
+        return storeMapper.toDto(stores);
     }
 }

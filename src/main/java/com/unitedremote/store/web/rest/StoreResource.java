@@ -1,6 +1,7 @@
 package com.unitedremote.store.web.rest;
 
 import com.unitedremote.store.service.StoreService;
+import com.unitedremote.store.service.util.Location;
 import com.unitedremote.store.web.rest.errors.BadRequestAlertException;
 import com.unitedremote.store.service.dto.StoreDTO;
 
@@ -79,14 +80,17 @@ public class StoreResource {
     }
 
     /**
-     * {@code GET  /stores} : get all the stores.
+     * {@code GET  /stores} : get all the stores sorted by distance from the user's location.
      *
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
+     * @param location the user's location.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of stores in body.
      */
-    @GetMapping("/stores")
-    public List<StoreDTO> getAllStores(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+    @PostMapping("/stores-sorted")
+    public List<StoreDTO> getAllStores(@RequestBody Location location) {
         log.debug("REST request to get all Stores");
+        if(location != null) {
+            return storeService.getStoresByLocation(location);
+        }
         return storeService.findAll();
     }
 
