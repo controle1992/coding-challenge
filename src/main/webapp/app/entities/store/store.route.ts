@@ -11,6 +11,7 @@ import { StoreDetailComponent } from './store-detail.component';
 import { StoreUpdateComponent } from './store-update.component';
 import { StoreDeletePopupComponent } from './store-delete-dialog.component';
 import { IStore } from 'app/shared/model/store.model';
+import { StoreFavoriteComponent } from 'app/entities/store/store-favorite.component';
 
 @Injectable({ providedIn: 'root' })
 export class StoreResolve implements Resolve<IStore> {
@@ -71,6 +72,15 @@ export const storeRoute: Routes = [
     data: {
       authorities: ['ROLE_USER'],
       pageTitle: 'Stores'
+    },
+    canActivate: [UserRouteAccessService]
+  },
+  {
+    path: 'favorite-stores',
+    component: StoreFavoriteComponent,
+    data: {
+      authorities: ['ROLE_USER'],
+      pageTitle: 'Favorite Stores'
     },
     canActivate: [UserRouteAccessService]
   }

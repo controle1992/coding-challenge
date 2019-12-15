@@ -1,0 +1,24 @@
+<div>
+    <div class="alert alert-warning" *ngIf="favoriteStores?.length === 0">
+        <span>No stores found</span>
+    </div>
+    <div *ngIf="favoriteStores?.length > 0">
+        <div class="row" >
+            <div class="col-sm-3 mb-4" *ngFor="let store of favoriteStores ;trackBy: trackId">
+                <div class="card center">
+                    <div class="card-body">
+                        <div class="card-title">
+                            {{store.name}}
+                        </div>
+                        <div>
+                            <img src="{{store.pictureUrl}}"/>
+                        </div>
+                        <div>
+                            <button class="btn btn-danger" (click)="removeStoreFromFav(store)">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

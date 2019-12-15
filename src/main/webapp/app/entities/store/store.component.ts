@@ -37,15 +37,23 @@ export class StoreComponent implements OnInit, OnDestroy {
       .subscribe(
         (res: IStore[]) => {
           this.stores = res;
+          for (let i = 0; i < this.stores.length; i++) {
+            for (let j = 0; j < this.stores[i].users.length; j++) {
+              if (this.stores[i].users[j].login === this.currentAccount.login) {
+                this.stores.splice(i, 1);
+                i--;
+              }
+            }
+          }
         },
         (res: HttpErrorResponse) => this.onError(res.message)
       );
   }
 
   ngOnInit() {
-    this.getLocation();
     this.accountService.identity().then(account => {
       this.currentAccount = account;
+      this.getLocation();
     });
     this.registerChangeInStores();
   }
@@ -75,5 +83,14 @@ export class StoreComponent implements OnInit, OnDestroy {
       });
     }
     this.loadAll();
+  }
+
+  removeFavoriteStores(store) {
+    for (let i = 0; i < this.stores.length; i++) {
+      if (this.stores[i].id === store.id) {
+        this.stores.splice(i, 1);
+        i--;
+      }
+    }
   }
 }

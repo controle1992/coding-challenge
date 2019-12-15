@@ -8,6 +8,7 @@ import { StoreUpdateComponent } from './store-update.component';
 import { StoreDeletePopupComponent, StoreDeleteDialogComponent } from './store-delete-dialog.component';
 import { storeRoute, storePopupRoute } from './store.route';
 import { StoreViewComponent } from 'app/entities/store/store-view.component';
+import { StoreFavoriteComponent } from 'app/entities/store/store-favorite.component';
 
 const ENTITY_STATES = [...storeRoute, ...storePopupRoute];
 
@@ -19,7 +20,8 @@ const ENTITY_STATES = [...storeRoute, ...storePopupRoute];
     StoreUpdateComponent,
     StoreDeleteDialogComponent,
     StoreDeletePopupComponent,
-    StoreViewComponent
+    StoreViewComponent,
+    StoreFavoriteComponent
   ],
   entryComponents: [StoreDeleteDialogComponent]
 })
