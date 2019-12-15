@@ -88,7 +88,7 @@ public class StoreResource {
     @PostMapping("/stores-sorted")
     public List<StoreDTO> getAllStores(@RequestBody Location location) {
         log.debug("REST request to get all Stores");
-        if(location != null) {
+        if(location.getLongitude() != null && location.getLatitude() != null) {
             return storeService.getStoresByLocation(location);
         }
         return storeService.findAll();

@@ -18,7 +18,7 @@ export class StoreComponent implements OnInit, OnDestroy {
   stores: IStore[];
   currentAccount: any;
   eventSubscriber: Subscription;
-  userLocation: Location;
+  userLocation: Location = new Location();
 
   constructor(
     protected storeService: StoreService,
@@ -74,5 +74,6 @@ export class StoreComponent implements OnInit, OnDestroy {
         this.loadAll();
       });
     }
+    this.loadAll();
   }
 }
