@@ -2,6 +2,12 @@
 
 This application was generated using JHipster 6.3.1, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v6.3.1](https://www.jhipster.tech/documentation-archive/v6.3.1).
 
+This application is a solution for the coding challenge proposed by United Remote.
+Functional spec can be found [here](https://github.com/hiddenfounders/web-coding-challenge/blob/master/coding-challenge.md)
+All the spec was respected except
+
+- [BONUS] As a User, I can dislike a shop, so it won’t be displayed within “Nearby Shops” list during the next 2 hours
+
 ## Development
 
 Before you can build this project, you must install and configure the following dependencies on your machine:
