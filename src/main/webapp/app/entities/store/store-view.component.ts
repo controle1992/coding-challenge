@@ -24,15 +24,4 @@ export class StoreViewComponent implements OnInit, OnDestroy {
     this.likedStore = true;
     this.selectedStore.emit(this.store);
   }
-
-  removeStoreFromFav() {
-    for (let i = 0; i < this.store.users.length; i++) {
-      if (this.store.users[i].login === this.currentAccount.login) {
-        this.store.users.splice(i, 1);
-        i--;
-      }
-    }
-    this.storeService.update(this.store).subscribe();
-    this.likedStore = false;
-  }
 }
