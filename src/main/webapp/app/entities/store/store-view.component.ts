@@ -10,7 +10,6 @@ export class StoreViewComponent implements OnInit, OnDestroy {
   @Input() store: Store;
   @Input() currentAccount: any;
   @Output() selectedStore: EventEmitter<IStore> = new EventEmitter<IStore>();
-  likedStore = false;
 
   constructor(private storeService: StoreService) {}
 
@@ -21,7 +20,6 @@ export class StoreViewComponent implements OnInit, OnDestroy {
   addStoreToFav() {
     this.store.users.push(this.currentAccount);
     this.storeService.update(this.store).subscribe();
-    this.likedStore = true;
     this.selectedStore.emit(this.store);
   }
 }
