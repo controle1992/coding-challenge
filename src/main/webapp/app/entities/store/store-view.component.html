@@ -7,8 +7,8 @@
             <img src="{{store.pictureUrl}}"/>
         </div>
         <div>
-            <button class="btn btn-primary">Like</button>
-            <button class="btn btn-primary">Dislike</button>
+            <button *ngIf="!likedStore" class="btn btn-primary" (click)="addStoreToFav()">Like</button>
+            <button class="btn btn-primary" (click)="removeStoreFromFav()">Dislike</button>
         </div>
     </div>
 </div>
